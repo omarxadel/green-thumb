@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:greenthumb/src/home/prediction_model.dart';
+import 'package:greenthumb/src/prediction/prediction_model.dart';
 
 Future<Prediction> createPrediction(String title) async {
   final response = await http.post(
