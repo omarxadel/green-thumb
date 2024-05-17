@@ -1,0 +1,6 @@
+{
+  "appTitle": "greenthumb",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
