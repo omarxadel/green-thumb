@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:greenthumb/src/prediction/prediction_controller.dart';
+import 'package:greenthumb/src/prediction/prediction_view.dart';
 
 import '../settings/settings_view.dart';
 
@@ -90,8 +91,15 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       Text(selectedFile),
                       ElevatedButton(
-                        onPressed: () {
-                          createPrediction('text');
+                        onPressed: () async {
+                          var res = await createPrediction('text');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  PredictionView(prediction: res),
+                            ),
+                          );
                         },
                         child: const Text("Continue with image"),
                       ),

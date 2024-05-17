@@ -1,13 +1,16 @@
 class Prediction {
   final bool success;
-  final String message;
+  final String plant;
+  final String disease;
 
-  const Prediction({required this.success, required this.message});
+  const Prediction(
+      {required this.success, required this.plant, required this.disease});
 
   factory Prediction.fromJson(Map<String, dynamic> json) {
     return Prediction(
       success: json['success'] as bool,
-      message: json['message'] as String,
+      plant: json['plant'] as String,
+      disease: json['disease'] as String,
     );
   }
 }
