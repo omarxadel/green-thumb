@@ -57,20 +57,18 @@ class _HomeViewState extends State<HomeView> {
             children: [
               Container(
                   margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-                  child: const Text(
-                    "Find out what's wrong with your plant🌿",
-                    style: TextStyle(fontSize: 21),
-                  )),
+                  child: Text("Find out what's wrong with your plant🌿",
+                      style: Theme.of(context).textTheme.headlineSmall!)),
               Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: const Text(
-                    "Upload an image of your sick plant and let us help you figure out what's wrong",
-                    style: TextStyle(fontSize: 16),
+                  child: Text(
+                    "Upload an image of your sick plant and let us help you figure out what's wrong.",
+                    style: Theme.of(context).textTheme.bodyMedium!,
                   )),
               Container(
                   margin: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
-                  child: ElevatedButton(
+                  child: OutlinedButton(
                     onPressed: () {
                       selectFile();
                     },
@@ -90,7 +88,7 @@ class _HomeViewState extends State<HomeView> {
                         fit: BoxFit.cover,
                       ),
                       Text(selectedFile),
-                      ElevatedButton(
+                      OutlinedButton(
                         onPressed: () async {
                           var res = await createPrediction('text');
                           Navigator.push(
@@ -101,7 +99,9 @@ class _HomeViewState extends State<HomeView> {
                             ),
                           );
                         },
-                        child: const Text("Continue with image"),
+                        child: const Text(
+                          "Continue with image",
+                        ),
                       ),
                     ],
                   ),
