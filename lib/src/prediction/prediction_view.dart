@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:greenthumb/src/prediction/prediction_controller.dart';
 import 'package:greenthumb/src/prediction/prediction_model.dart';
 
-class PredictionView extends StatelessWidget {
+class PredictionView extends StatefulWidget {
   // In the constructor, require a Prediction.
   const PredictionView({super.key, required this.prediction});
 
   // Declare a field that holds the Prediction.
   final Prediction prediction;
+
+  @override
+  State<PredictionView> createState() => _PredictionViewState();
+}
+
+class _PredictionViewState extends State<PredictionView> {
+  String? treatment;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +37,7 @@ class PredictionView extends StatelessWidget {
                   children: [
                     Text("Plant Name:",
                         style: Theme.of(context).textTheme.bodySmall!),
-                    Text(prediction.plant,
+                    Text(widget.prediction.plant,
                         style: Theme.of(context).textTheme.titleLarge!),
                   ],
                 ),
@@ -42,7 +50,7 @@ class PredictionView extends StatelessWidget {
                       children: [
                         Text("Disease:",
                             style: Theme.of(context).textTheme.bodySmall!),
-                        Text(prediction.disease,
+                        Text(widget.prediction.disease,
                             style: Theme.of(context).textTheme.titleLarge!),
                       ])),
               Container(
@@ -53,9 +61,40 @@ class PredictionView extends StatelessWidget {
                       children: [
                         Text("Confidence:",
                             style: Theme.of(context).textTheme.bodySmall!),
-                        Text("${prediction.confidence * 100}%",
+                        Text("${widget.prediction.confidence * 100}%",
                             style: Theme.of(context).textTheme.titleLarge!),
-                      ]))
+                      ])),
+              Container(
+                  margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () async {
+                            var res = await getTreatment(
+                                widget.prediction.plant,
+                                widget.prediction.disease);
+
+                            setState(() {
+                              treatment = res.treatment;
+                            });
+                          },
+                          child: const Text("Explore treatments"),
+                        )
+                      ])),
+              if (treatment != null)
+                Container(
+                    margin: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Suggested Treatment:",
+                              style: Theme.of(context).textTheme.bodySmall!),
+                          Text(treatment!,
+                              style: Theme.of(context).textTheme.titleLarge!),
+                        ])),
             ],
           )),
     );
