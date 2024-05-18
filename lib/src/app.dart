@@ -8,12 +8,15 @@ import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
-  const MyApp({
-    super.key,
-    required this.settingsController,
-  });
+  const MyApp(
+      {super.key,
+      required this.settingsController,
+      required this.themeLight,
+      required this.themeDark});
 
   final SettingsController settingsController;
+  final ThemeData themeLight;
+  final ThemeData themeDark;
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +58,8 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
+          theme: themeLight,
+          darkTheme: themeDark,
           themeMode: settingsController.themeMode,
 
           // Define a function to handle named routes in order to support
