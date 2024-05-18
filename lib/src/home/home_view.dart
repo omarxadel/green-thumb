@@ -22,6 +22,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   String selectedFile = "";
   Uint8List? image;
+
   @override
   Widget build(BuildContext context) {
     void selectFile() async {
@@ -90,14 +91,18 @@ class _HomeViewState extends State<HomeView> {
                       Text(selectedFile),
                       OutlinedButton(
                         onPressed: () async {
-                          var res = await createPrediction('text');
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  PredictionView(prediction: res),
-                            ),
-                          );
+                          try {
+                            var res = await createPrediction(image!);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PredictionView(prediction: res),
+                              ),
+                            );
+                          } catch (e) {
+                            print(e);
+                          }
                         },
                         child: const Text(
                           "Continue with image",
