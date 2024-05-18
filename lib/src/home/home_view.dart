@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:greenthumb/src/prediction/prediction_controller.dart';
 import 'package:greenthumb/src/prediction/prediction_view.dart';
+import 'package:greenthumb/src/ui/outlined_loading_button.dart';
 
 import '../settings/settings_view.dart';
 
@@ -69,12 +70,13 @@ class _HomeViewState extends State<HomeView> {
               Container(
                   margin: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
-                  child: OutlinedButton(
-                    onPressed: () {
-                      selectFile();
-                    },
-                    child: const Text("Upload Image"),
-                  )),
+                  child: OutlinedLoadingButton(
+                      onPressed: () {
+                        selectFile();
+                      },
+                      child: const Text(
+                        "Upload Image",
+                      ))),
               if (image != null)
                 Container(
                   margin: const EdgeInsets.symmetric(
@@ -89,25 +91,24 @@ class _HomeViewState extends State<HomeView> {
                         fit: BoxFit.cover,
                       ),
                       Text(selectedFile),
-                      OutlinedButton(
-                        onPressed: () async {
-                          try {
-                            var res = await createPrediction(image!);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    PredictionView(prediction: res),
-                              ),
-                            );
-                          } catch (e) {
-                            print(e);
-                          }
-                        },
-                        child: const Text(
-                          "Continue with image",
-                        ),
-                      ),
+                      OutlinedLoadingButton(
+                          onPressed: () async {
+                            try {
+                              var res = await createPrediction(image!);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      PredictionView(prediction: res),
+                                ),
+                              );
+                            } catch (e) {
+                              print(e);
+                            }
+                          },
+                          child: const Text(
+                            "Continue with image",
+                          )),
                     ],
                   ),
                 ),

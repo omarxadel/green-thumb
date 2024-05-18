@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greenthumb/src/prediction/prediction_controller.dart';
 import 'package:greenthumb/src/prediction/prediction_model.dart';
+import 'package:greenthumb/src/ui/outlined_loading_button.dart';
 
 class PredictionView extends StatefulWidget {
   // In the constructor, require a Prediction.
@@ -70,7 +71,7 @@ class _PredictionViewState extends State<PredictionView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        OutlinedButton(
+                        OutlinedLoadingButton(
                           onPressed: () async {
                             var res = await getTreatment(
                                 widget.prediction.plant,
