@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:greenthumb/src/home/home_view.dart';
+import 'package:greenthumb/src/splash/splash_view.dart';
 
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
@@ -72,8 +73,9 @@ class MyApp extends StatelessWidget {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
                   case HomeView.routeName:
-                  default:
                     return const HomeView();
+                  default:
+                    return const SplashScreen();
                 }
               },
             );

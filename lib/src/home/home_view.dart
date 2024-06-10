@@ -14,7 +14,7 @@ class HomeView extends StatefulWidget {
     super.key,
   });
 
-  static const routeName = '/';
+  static const routeName = '/home';
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -40,7 +40,10 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
+          title: Image.asset(
+            'assets/images/image.png',
+            height: 64,
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.settings),
